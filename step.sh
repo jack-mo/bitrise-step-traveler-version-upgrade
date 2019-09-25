@@ -1,7 +1,10 @@
 #!/bin/bash
 set -ex
 
-echo "Hello World"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# upgrade path using commit messages
+${SCRIPT_DIR}/upgrade.sh
 
 #
 # --- Export Environment Variables for other Steps:
