@@ -3,7 +3,7 @@
 # Arguments: $1=module
 find_latest_tag() {
     pattern="^($MODULE\-|[^a-z]*)v([0-9]+\.[0-9]+\.[0-9]+)\$"
-    for tag in $(git tag -l --sort=v:refname); do
+    for tag in $(git tag -l --sort=v:refname | tac); do
         if [[ "$tag" =~ $pattern ]]; then
             echo $tag
             exit 0
@@ -13,7 +13,7 @@ find_latest_tag() {
     echo "No Version found"
 }
 
-# Arguments: $1=tag
+# Arguments: $1=last_tag
 find_latest_semver() {
   pattern="^.*v([0-9]+\.[0-9]+\.[0-9]+)\$"
   version=$([[ "$1" =~ $pattern ]] && echo "${BASH_REMATCH[1]}")
